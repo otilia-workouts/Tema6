@@ -1,6 +1,6 @@
 package basic;
 
-public class Trainer  extends Persoana {
+public class Trainer extends Persoana {
     public Trainer(String nume, String prenume, String oras, Integer varsta, boolean casatorita) {
         super(nume, prenume, oras, varsta, casatorita);
     }
@@ -8,5 +8,11 @@ public class Trainer  extends Persoana {
     @Override
     public String getResponsabilitati() {
         return "Pregatirea materialelor, evaluarea temelor, crearea contextului de lucru, raspunderea la intrebari";
+    }
+
+    @Override
+    public String obtineIdentificator() {
+        return "trainer_" + super.obtineIdentificator();
+
     }
 }

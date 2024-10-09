@@ -14,6 +14,9 @@ public class Main {
         System.out.println("Exporer-ul are responsabilitatile: " + e1.getResponsabilitati());
         System.out.println(t1);
         System.out.println("Trainer-ul are respomsabilitatile: " + t1.getResponsabilitati());
+
+        System.out.println(e1.obtineIdentificator());
+        System.out.println(t1.obtineIdentificator());
     }
     //TODO 1: Creati o noua clasa Explorer in pachetul basic
 
