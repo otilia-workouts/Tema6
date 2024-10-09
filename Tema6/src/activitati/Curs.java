@@ -1,6 +1,7 @@
 package activitati;
 
 import basic.Persoana;
+import basic.Trainer;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -12,6 +13,7 @@ public class Curs implements Activitate{
     private Persoana trainer;
     private ArrayList<Persoana> exploreri;
     private LinkedHashMap<String, Activitate> materiale = new LinkedHashMap<String,Activitate>();
+    private int cost;
 
     public Curs(String nume, String dificultate, Persoana trainer, ArrayList<Persoana> exploreri, int cost) {
         this.nume = nume;
@@ -57,11 +59,13 @@ public class Curs implements Activitate{
         return exploreri;
     }
 
-    public int getCost() {
+    public int getCost(Persoana persoana) {
+        if(persoana instanceof Trainer){
+            return 0;
+        }
         return cost;
     }
 
-    private int cost;
     @Override
     public String GetDescriere() {
         return "Activitate " + nume + " cu dificultatea " + dificultate;

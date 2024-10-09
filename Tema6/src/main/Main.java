@@ -34,6 +34,12 @@ public class Main {
         System.out.println(t1.obtineIdentificator());
 
         Curs curs = new Curs(numeCurs, dificultateCurs, t1, exploreri,costCurs);
+
+        //folositi obtineIdentificator() pentru a vedea mai clar tipul persoanei
+        //ex: explorer_matei_SANDU pays 1000 vs:	trainer_sorina_ION pays 0
+        for(Persoana exploarator: exploreri){
+            System.out.println(exploarator.obtineIdentificator()+ " pays "+ curs.getCost(exploarator));
+        }
     }
     //TODO 1: Creati o noua clasa Explorer in pachetul basic
 
