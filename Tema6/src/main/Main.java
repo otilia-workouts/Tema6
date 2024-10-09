@@ -1,14 +1,29 @@
 package main;
 
+import activitati.Curs;
 import basic.Explorer;
 import basic.Persoana;
 import basic.Trainer;
+
+import java.util.ArrayList;
 
 public class Main {
 
     public static void main(String[] args) {
         Persoana e1 = new Explorer("Ion", "Elena", "Brasov", 23, false);
-        Persoana t1 = new Trainer("Laura", "Antonache", "Brasov", 27, true);
+        Persoana e2 = new Explorer("Ursu", "Anca", "Brasov", 19, false);
+        Persoana e3 = new Explorer("Vulpe", "Maria", "Bucuresti", 30, true);
+        Persoana t1 = new Trainer("Antonache", "Laura", "Brasov", 27, true);
+        Persoana t2 = new Trainer("Cantemir", "Ion", "Bucuresti", 29, true);
+        ArrayList<Persoana> exploreri= new ArrayList<>();
+        String numeCurs="JAVA";
+        String dificultateCurs="mediu";
+        int costCurs=1000;
+
+        exploreri.add(e1);
+        exploreri.add(e2);
+        exploreri.add(e3);
+        exploreri.add(t2);
 
         System.out.println(e1);
         System.out.println("Exporer-ul are responsabilitatile: " + e1.getResponsabilitati());
@@ -17,6 +32,8 @@ public class Main {
 
         System.out.println(e1.obtineIdentificator());
         System.out.println(t1.obtineIdentificator());
+
+        Curs curs = new Curs(numeCurs, dificultateCurs, t1, exploreri,costCurs);
     }
     //TODO 1: Creati o noua clasa Explorer in pachetul basic
 
