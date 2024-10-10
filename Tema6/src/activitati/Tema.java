@@ -2,12 +2,12 @@ package activitati;
 
 public class Tema implements Activitate{
     @Override
-    public String GetDescriere() {
+    public String getDescriere() {
         return "Activitate de lucru individual & Workout";
     }
 
     @Override
-    public String GetDurata() {
+    public String getDurata() {
         return "4d";
     }
 }

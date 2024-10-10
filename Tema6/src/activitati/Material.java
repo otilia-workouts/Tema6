@@ -2,12 +2,12 @@ package activitati;
 
 public class Material implements Activitate{
     @Override
-    public String GetDescriere() {
+    public String getDescriere() {
         return "Activitate de studiu individual";
     }
 
     @Override
-    public String GetDurata() {
+    public String getDurata() {
         return "5d";
     }
 }

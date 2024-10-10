@@ -1,6 +1,9 @@
 package main;
 
 import activitati.Curs;
+import activitati.Material;
+import activitati.Rush;
+import activitati.Tema;
 import basic.Explorer;
 import basic.Persoana;
 import basic.Trainer;
@@ -40,6 +43,26 @@ public class Main {
         for(Persoana exploarator: exploreri){
             System.out.println(exploarator.obtineIdentificator()+ " pays "+ curs.getCost(exploarator));
         }
+
+        Rush rush1 = new Rush();
+        Rush rush2 = new Rush();
+        Tema tema1 = new Tema();
+        Tema tema2 = new Tema();
+        Material material1 = new Material();
+        Material material2 = new Material();
+
+        curs.getActivitati().put("Rush 1", rush1);
+        curs.getActivitati().put("Rush 2", rush2);
+        curs.getActivitati().put("Tipuri primitive", tema1);
+        curs.getActivitati().put("HashMap", tema2);
+        curs.getActivitati().put("Material tipuri de date", material1);
+        curs.getActivitati().put("Matrial HashMap", material2);
+        //TODO 23: Definiti cate doua activitati de fiecare tip Rush, Tema, Material si adaugati-le in linkedhashmap-ul cursului apoi afisati calendarul cursului
+
+	for(String key:curs.getActivitati().keySet()) {
+		System.out.println("Activitatea " + key + " este de tip " + curs.getActivitati().get(key).getClass() + " cu descrierea \"" +
+					curs.getActivitati().get(key).getDescriere() + "\" si durata estimata de " + curs.getActivitati().get(key).getDurata() );
+	}
     }
     //TODO 1: Creati o noua clasa Explorer in pachetul basic
 

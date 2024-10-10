@@ -12,7 +12,7 @@ public class Curs implements Activitate{
     private String dificultate;
     private Persoana trainer;
     private ArrayList<Persoana> exploreri;
-    private LinkedHashMap<String, Activitate> materiale = new LinkedHashMap<String,Activitate>();
+    private LinkedHashMap<String, Activitate> activitati = new LinkedHashMap<String,Activitate>();
     private int cost;
 
     public Curs(String nume, String dificultate, Persoana trainer, ArrayList<Persoana> exploreri, int cost) {
@@ -67,12 +67,12 @@ public class Curs implements Activitate{
     }
 
     @Override
-    public String GetDescriere() {
+    public String getDescriere() {
         return "Activitate " + nume + " cu dificultatea " + dificultate;
     }
 
     @Override
-    public String GetDurata() {
+    public String getDurata() {
         switch (dificultate){
             case "usor":
                 return "1 luna";
@@ -85,11 +85,11 @@ public class Curs implements Activitate{
         }
     }
 
-    public LinkedHashMap<String, Activitate> getMateriale() {
-        return materiale;
+    public LinkedHashMap<String, Activitate> getActivitati() {
+        return activitati;
     }
 
-    public void setMateriale(LinkedHashMap<String, Activitate> materiale) {
-        this.materiale = materiale;
+    public void setActivitati(LinkedHashMap<String, Activitate> activitati) {
+        this.activitati = activitati;
     }
 }

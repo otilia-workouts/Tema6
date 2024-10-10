@@ -2,12 +2,12 @@ package activitati;
 
 public class Rush implements Activitate{
     @Override
-    public String GetDescriere() {
+    public String getDescriere() {
         return "Activitate de lucru colaborativ & Q&A";
     }
 
     @Override
-    public String GetDurata() {
+    public String getDurata() {
         return "2h";
     }
 }
