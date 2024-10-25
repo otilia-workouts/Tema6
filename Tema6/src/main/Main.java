@@ -15,7 +15,7 @@ import java.util.regex.PatternSyntaxException;
 
 public class Main {
 
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) {
         Persoana e1 = new Explorer("Ion", "Elena", "Brasov", 23, false);
         Persoana e2 = new Explorer("Ursu", "Anca", "Brasov", 19, false);
         Persoana e3 = new Explorer("Vulpe", "Maria", "Bucuresti", 30, true);
