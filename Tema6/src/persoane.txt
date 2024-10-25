@@ -1,0 +1,6 @@
+Persoana: Explorer, Andrei, Alexandru, București, 35, false
+Persoana: Explorer, Vasile, Maria, București, 20, false
+Persoana: Trainer, Popescu, Ana, Cluj, 45, true
+Persoana: Trainer, Kane, Adelaide, Cluj, 35ani, true
+Persoana: Explorer, O'Brien, Dylen, 33
+Persoana: Explorer, Iancu, Victor, București, 15, false

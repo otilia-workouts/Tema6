@@ -7,21 +7,24 @@ import activitati.Tema;
 import basic.Explorer;
 import basic.Persoana;
 import basic.Trainer;
+import exceptions.InvalidAgeException;
 
+import java.io.*;
 import java.util.ArrayList;
+import java.util.regex.PatternSyntaxException;
 
 public class Main {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         Persoana e1 = new Explorer("Ion", "Elena", "Brasov", 23, false);
         Persoana e2 = new Explorer("Ursu", "Anca", "Brasov", 19, false);
         Persoana e3 = new Explorer("Vulpe", "Maria", "Bucuresti", 30, true);
         Persoana t1 = new Trainer("Antonache", "Laura", "Brasov", 27, true);
         Persoana t2 = new Trainer("Cantemir", "Ion", "Bucuresti", 29, true);
-        ArrayList<Persoana> exploreri= new ArrayList<>();
-        String numeCurs="JAVA";
-        String dificultateCurs="mediu";
-        int costCurs=1000;
+        ArrayList<Persoana> exploreri = new ArrayList<>();
+        String numeCurs = "JAVA";
+        String dificultateCurs = "mediu";
+        int costCurs = 1000;
 
         exploreri.add(e1);
         exploreri.add(e2);
@@ -36,13 +39,11 @@ public class Main {
         System.out.println(e1.obtineIdentificator());
         System.out.println(t1.obtineIdentificator());
 
-        Curs curs = new Curs(numeCurs, dificultateCurs, t1, exploreri,costCurs);
+        Curs curs = new Curs(numeCurs, dificultateCurs, t1, exploreri, costCurs);
 
         //folositi obtineIdentificator() pentru a vedea mai clar tipul persoanei
         //ex: explorer_matei_SANDU pays 1000 vs:	trainer_sorina_ION pays 0
-        for(Persoana exploarator: exploreri){
-            System.out.println(exploarator.obtineIdentificator()+ " pays "+ curs.getCost(exploarator));
-        }
+        afisarePersoane(exploreri, curs);
 
         Rush rush1 = new Rush();
         Rush rush2 = new Rush();
@@ -59,11 +60,60 @@ public class Main {
         curs.getActivitati().put("Matrial HashMap", material2);
         //TODO 23: Definiti cate doua activitati de fiecare tip Rush, Tema, Material si adaugati-le in linkedhashmap-ul cursului apoi afisati calendarul cursului
 
-	for(String key:curs.getActivitati().keySet()) {
-		System.out.println("Activitatea " + key + " este de tip " + curs.getActivitati().get(key).getClass() + " cu descrierea \"" +
-					curs.getActivitati().get(key).getDescriere() + "\" si durata estimata de " + curs.getActivitati().get(key).getDurata() );
-	}
+        for (String key : curs.getActivitati().keySet()) {
+            System.out.println("Activitatea " + key + " este de tip " + curs.getActivitati().get(key).getClass() + " cu descrierea \"" +
+                               curs.getActivitati().get(key).getDescriere() + "\" si durata estimata de " + curs.getActivitati().get(key).getDurata());
+        }
+
+        //TODO M10.1:parsați fișierul creat
+        File file = new File("src\\persoane.txt");
+        try (BufferedReader bufferedReader = new BufferedReader(new FileReader(file))) {
+
+            String line;
+
+            while ((line = bufferedReader.readLine()) != null) {
+                try {
+                    System.out.println(line);
+                    //TODO M10.2: pentru fiecare rând parsați stringul (split pe baza de ":" și apoi "," în modelul de mai sus al formatului fișierului)
+                    String[] arrayOfString = line.split("[:, ]+");
+                    for (String word : arrayOfString) {
+                        System.out.println(word);
+                    }
+                    //TODO M10.3: pentru fiecare linie foloșiti valorile citite și creați câte o instanță de tip Explorer sau Trainer și adaugați-o în lista corespunzâtoare
+                    if (arrayOfString[1].equals("Explorer")) {
+                        Persoana explorer = new Explorer(arrayOfString[2], arrayOfString[3], arrayOfString[4], Integer.parseInt(arrayOfString[5]), Boolean.parseBoolean(arrayOfString[6]));
+                        if (explorer.getVarsta()<16){
+                            throw new InvalidAgeException("The age must be at least 16.");
+                        }
+                        exploreri.add(explorer);
+                    } else if (arrayOfString[1].equals("Trainer")) {
+                        Persoana trainer = new Trainer(arrayOfString[2], arrayOfString[3], arrayOfString[4], Integer.parseInt(arrayOfString[5]), Boolean.parseBoolean(arrayOfString[6]));
+                        exploreri.add(trainer);
+                    }
+                } catch (PatternSyntaxException e) {
+                    System.out.println("java.util.regex.PatternSyntaxException occurs: " + e.getMessage());
+                } catch (NumberFormatException e) {
+                    System.out.println("java.lang.NumberFormatException occurs: " + e.getMessage());
+                } catch (ArrayIndexOutOfBoundsException e) {
+                    System.out.println("java.lang.ArrayIndexOutOfBounds Exception occurs: "+e.getMessage());
+                } catch (InvalidAgeException e){
+                    System.out.println("InvalidAgeException occurs: "+e.getMessage());
+                }
+            }
+    //TODO M10.4: folosiți tratare de excepții pentru: deschidere/parsare fișier, lungimea array-ului de String-uri splited, transformarea din String în Integer a valorii pentru vârsta etc
+        } catch (FileNotFoundException e) {
+            System.out.println("java.io.FileNotFoundException occurs: " + e.getMessage());
+        } catch (IOException e) {
+            System.out.println("java.io.IOException occurs: " + e.getMessage());
+        } catch (Exception e) {
+            System.out.println("Parent Exception occurs");
+        }
+
+        afisarePersoane(exploreri, curs);
+
     }
+    //TODO M10.5: modificați mediul/fișierul pentru a întâlni acele excepții (exemplu, nu respectați formatul agreat, adăugați un rând incomplet, schimbați formatul vârstei -> eg: 45ani în loc de 45) și observați comportamentul programului.
+
     //TODO 1: Creati o noua clasa Explorer in pachetul basic
 
     //TODO 2: Creati o noua clasa Trainer in pachetul basic
@@ -134,6 +184,12 @@ public class Main {
 					c.getActivitati().get(key).getDescriere() + "\" si durata estimata de " + c.getActivitati().get(key).getDurata() );
 	}
 	*/
+
+    static void afisarePersoane(ArrayList<Persoana> exploreri, Curs curs) {
+        for (Persoana exploarator : exploreri) {
+            System.out.println(exploarator.obtineIdentificator() + " pays " + curs.getCost(exploarator));
+        }
+    }
 }
 		
 	
